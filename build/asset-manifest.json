@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Mornifymusic/static/css/main.cc4c4362.css",
-    "main.js": "/Mornifymusic/static/js/main.50317b54.js",
+    "main.css": "/Mornifymusic/static/css/main.2a099c37.css",
+    "main.js": "/Mornifymusic/static/js/main.4e8e7c65.js",
     "index.html": "/Mornifymusic/index.html",
-    "main.cc4c4362.css.map": "/Mornifymusic/static/css/main.cc4c4362.css.map",
-    "main.50317b54.js.map": "/Mornifymusic/static/js/main.50317b54.js.map"
+    "main.2a099c37.css.map": "/Mornifymusic/static/css/main.2a099c37.css.map",
+    "main.4e8e7c65.js.map": "/Mornifymusic/static/js/main.4e8e7c65.js.map"
   },
   "entrypoints": [
-    "static/css/main.cc4c4362.css",
-    "static/js/main.50317b54.js"
+    "static/css/main.2a099c37.css",
+    "static/js/main.4e8e7c65.js"
   ]
 }
