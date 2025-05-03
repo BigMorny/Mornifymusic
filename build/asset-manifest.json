@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Mornifymusic/static/css/main.31a5bab4.css",
+    "main.js": "/Mornifymusic/static/js/main.ab55cf1e.js",
+    "index.html": "/Mornifymusic/index.html",
+    "main.31a5bab4.css.map": "/Mornifymusic/static/css/main.31a5bab4.css.map",
+    "main.ab55cf1e.js.map": "/Mornifymusic/static/js/main.ab55cf1e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31a5bab4.css",
+    "static/js/main.ab55cf1e.js"
+  ]
+}
