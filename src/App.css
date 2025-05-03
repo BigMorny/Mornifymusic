@@ -1,8 +1,8 @@
 :root {
-  --primary-color: #ffffff; /* white */
+  --primary-color: #000000; /* black */
   --secondary-color: #007bff; /* blue */
-  --text-color: #000000;
-  --background-gradient: linear-gradient(135deg, var(--primary-color), #cce5ff);
+  --text-color: #007bff; /* blue text */
+  --background-gradient: linear-gradient(135deg, #000000, #0a0a0a);
 }
 
 body {
@@ -16,6 +16,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100vw;
 }
 
 .header {
@@ -34,7 +35,7 @@ body {
 .logo {
   width: 40px;
   height: 40px;
-  filter: brightness(0) saturate(100%) invert(27%) sepia(92%) saturate(749%) hue-rotate(192deg) brightness(96%) contrast(92%);
+  filter: brightness(0) saturate(100%) invert(27%) sepia(92%) saturate(7491%) hue-rotate(196deg) brightness(96%) contrast(101%);
 }
 
 .main-content {
@@ -45,11 +46,44 @@ body {
 
 .sidebar {
   width: 250px;
-  background: #e6f0ff;
+  background: #0a0a0a;
   padding: 1rem;
   color: var(--text-color);
   overflow-y: auto;
   transition: transform 0.3s ease;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar nav li {
+  padding: 10px;
+  background: rgba(0, 123, 255, 0.1);
+  color: var(--text-color);
+  text-decoration: none;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar nav li:hover,
+.sidebar nav li:focus,
+.sidebar nav li:active,
+.sidebar nav li.active {
+  background: var(--secondary-color);
+  color: #000000;
+  transform: translateY(-2px);
+  outline: none;
 }
 
 .search-input {
@@ -60,12 +94,32 @@ body {
   border-radius: 4px;
   font-size: 1rem;
   box-sizing: border-box;
+  background-color: var(--primary-color);
+  color: var(--text-color);
 }
 
 .search-input:focus {
   outline: none;
   border-color: var(--secondary-color);
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  box-shadow: 0 0 5px var(--secondary-color);
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .close-btn {
+    display: block;
+  }
 }
 
 /* Sidebar visible normally on large screens */
@@ -86,11 +140,14 @@ body {
     top: 0;
     left: 0;
     height: 100vh;
+    width: 200px;
     transform: translateX(-100%);
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 0 10px rgba(0, 123, 255, 0.7);
     z-index: 1000;
+    background-color: #0a0a0a;
+    transition: transform 0.3s ease;
   }
 
   .sidebar.open {
@@ -105,8 +162,15 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 123, 255, 0.5);
   z-index: 999;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidebar-overlay.open {
+    display: block;
+  }
 }
 
 /* Menu button hidden on large screens */
@@ -121,8 +185,9 @@ body {
 }
 
 .menu-button:hover,
-.menu-button:focus {
-  color: #0056b3;
+.menu-button:focus,
+.menu-button:active {
+  color: #3399ff;
   outline: none;
 }
 
@@ -140,6 +205,7 @@ body {
   background: var(--primary-color);
   padding: 1rem;
   overflow-y: auto;
+  color: var(--text-color);
 }
 
 .playlist,
@@ -154,6 +220,7 @@ body {
 .library h2,
 .playlists h2 {
   margin-top: 0;
+  color: var(--secondary-color);
 }
 
 .playlist ul {
@@ -171,15 +238,19 @@ body {
   border-radius: 4px;
   transition: background-color 0.3s ease;
   color: var(--text-color);
-  position: relative; /* Added for .remove-btn positioning */
+  position: relative;
+  border-bottom: 1px solid var(--secondary-color);
 }
 
 .playlist li.active,
-.playlist li:hover,
+.playlist li:focus,
+.playlist li:active,
 .library li.active,
-.library li:hover {
-  background-color: var(--secondary-color);
-  color: #fff;
+.library li:focus,
+.library li:active {
+  background-color: rgba(0, 123, 255, 0.3);
+  color: #000000;
+  outline: none;
 }
 
 .cover {
@@ -193,45 +264,58 @@ body {
 
 .song-info {
   flex: 1;
+  min-width: 0;
+  color: var(--text-color);
 }
 
 .title {
   display: block;
   font-weight: bold;
-  color: var(--text-color);
+  color: var(--secondary-color);
+  white-space: normal;
+  word-break: break-word;
+  overflow: hidden;
 }
 
 .artist {
   font-size: 0.9rem;
-  color: #666;
+  color: #a0a0a0;
 }
 
 .duration {
   font-size: 0.8rem;
-  color: #666;
+  color: #a0a0a0;
 }
 
 .player {
-  background: #e6f0ff;
+  background: #0a0a0a;
   padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
   display: flex;
   align-items: center;
   gap: 15px;
   color: var(--text-color);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
 }
 
 .player .cover {
   width: 100px;
   height: 100px;
-  box-shadow: 0 0 10px var(--secondary-color);
+  box-shadow: 0 0 5px var(--secondary-color);
   border-radius: 8px;
-  transition: transform 0.3s ease;
+  transition: box-shadow 0.3s ease;
 }
 
-.player .cover:hover {
-  transform: scale(1.05);
+.player .cover:hover,
+.player .cover:focus,
+.player .cover:active {
+  box-shadow: 0 0 15px var(--secondary-color);
+  outline: none;
 }
 
 .controls-vertical {
@@ -250,16 +334,18 @@ body {
 }
 
 .controls-vertical button:hover,
-.controls-vertical button:focus {
+.controls-vertical button:focus,
+.controls-vertical button:active {
   color: var(--secondary-color);
   outline: none;
 }
 
+/* Volume control styles */
 .volume-control {
   width: 100px;
   cursor: pointer;
   -webkit-appearance: none;
-  background: #cce5ff;
+  background: var(--secondary-color);
   height: 5px;
   border-radius: 5px;
   outline: none;
@@ -286,121 +372,21 @@ body {
   border: none;
 }
 
-/* Player controls smaller on small screens */
-@media (max-width: 600px) {
-  .player {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 0.7rem;
-  }
-
-  .player .cover {
-    width: 50px;
-    height: 50px;
-  }
-
-  .controls-vertical {
-    gap: 8px;
-  }
-
-  .controls-vertical button {
-    font-size: 1rem;
-  }
-
-  .volume-control {
-    width: 60px;
-    height: 3px;
-  }
-
-  .volume-control::-webkit-slider-thumb {
-    width: 10px;
-    height: 10px;
-    margin-top: -3px;
-  }
-
-  .volume-control::-moz-range-thumb {
-    width: 10px;
-    height: 10px;
-  }
-}
-
-button {
-  background-color: var(--primary-color);
-  border: 1px solid var(--secondary-color);
-  color: var(--secondary-color);
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-button:hover,
-button:focus {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-  outline: none;
-}
-
-.library li .remove-btn {
-  background-color: var(--secondary-color);
-  border: none;
-  color: white;
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.8rem;
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.library li .remove-btn:hover,
-.library li .remove-btn:focus {
-  background-color: #0056b3;
-  outline: none;
-}
-
-.modal-content {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  max-width: 600px;
-  max-height: 80vh;
-  width: 90%;
-  background: var(--primary-color);
-  color: var(--text-color);
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  transform: translate(-50%, -50%);
-  overflow-y: auto;
-  z-index: 1000;
-  padding: 1rem;
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-}
-
-/* Styles from provided snippet, with corrections */
+/* Song detail page layout side by side */
 .song-detail-page {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  gap: 20px;
   padding: 2rem;
   background: var(--primary-color);
   border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
+  max-width: 800px;
   margin: 2rem auto;
-  z-index: 10; /* Ensure it’s above other content */
+  color: var(--text-color);
+  z-index: 10;
+  overflow-x: auto;
 }
 
 .detail-cover-large {
@@ -408,48 +394,38 @@ button:focus {
   height: 200px;
   border-radius: 8px;
   object-fit: cover;
-  margin-bottom: 1rem;
   box-shadow: 0 0 10px var(--secondary-color);
+  margin-bottom: 0;
+  flex-shrink: 0;
 }
 
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
+.song-info {
+  flex: 1;
+  min-width: 0;
   color: var(--text-color);
-  transition: color 0.3s ease;
 }
 
-.close-btn:hover,
-.close-btn:focus {
-  color: var(--secondary-color);
-  outline: none;
-}
-
-.playlists {
-  padding: 1rem;
-}
-
-.playlists h2 {
-  margin-top: 0;
-}
-
+/* Replace hover with focus and active for tap/click */
+.playlist li,
+.library li,
 .playlists li {
-  padding: 0.5rem;
-  cursor: pointer;
-  border-radius: 4px;
   transition: background-color 0.3s ease;
 }
 
-.playlists li.active,
-.playlists li:hover,
-.playlists li:focus {
-  background-color: var(--secondary-color);
-  color: #fff;
+.playlist li:hover,
+.library li:hover,
+.playlists li:hover {
+  background-color: transparent;
+}
+
+.playlist li:focus,
+.playlist li:active,
+.library li:focus,
+.library li:active,
+.playlists li:focus,
+.playlists li:active {
+  background-color: rgba(0, 123, 255, 0.3);
+  color: #000000;
   outline: none;
 }
 
@@ -457,10 +433,14 @@ button:focus {
 @media (max-width: 768px) {
   .app {
     flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
   }
 
   .main-content {
     flex-direction: column;
+    width: 100%;
   }
 
   .sidebar {
@@ -475,7 +455,7 @@ button:focus {
     width: 200px;
     height: 100vh;
     background-color: var(--primary-color);
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 0 5px rgba(0, 123, 255, 0.3);
     z-index: 1000;
     padding: 10px;
     overflow-y: auto;
@@ -485,18 +465,22 @@ button:focus {
     width: 100%;
     order: 2;
     margin-left: 0;
+    padding: 1rem;
   }
 
   .playlist,
-  .library,
+  .library {
+    padding: 8px 8px 8px 4px;
+  }
+
   .playlists {
     padding: 8px;
   }
 
   .playlist ul li,
   .library ul li {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row !important;
+    align-items: center !important;
     font-size: 0.9rem;
   }
 
@@ -504,11 +488,17 @@ button:focus {
   .library ul li img.cover {
     width: 60px;
     height: 60px;
-    margin-bottom: 6px;
+    margin-bottom: 0;
+    margin-right: 1rem;
   }
 
   .song-info {
-    width: 100%;
+    width: auto;
+    min-width: 0;
+  }
+
+  .title {
+    font-size: 0.9rem;
   }
 
   .header {
@@ -527,22 +517,29 @@ button:focus {
     left: 0;
     font-size: 0.9rem;
     padding: 8px;
+    background: var(--primary-color);
+    box-shadow: 0 -2px 10px rgba(0, 123, 255, 0.5);
+    z-index: 10000;
   }
 
   .song-detail-page {
-    max-width: 100%;
-    margin: 1rem;
+    flex-direction: row;
+    flex-wrap: nowrap;
     padding: 1rem;
+    margin: 1rem 0;
+    max-width: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
   }
 
   .detail-cover-large {
     width: 150px;
     height: 150px;
-  }
-
-  .modal-content {
-    width: 95%;
-    padding: 0.5rem;
+    margin-bottom: 0;
+    margin-right: 1rem;
+    flex-shrink: 0;
   }
 }
 
@@ -551,5 +548,71 @@ button:focus {
   .sidebar input[type="text"],
   .sidebar nav {
     display: block;
+  }
+}
+
+/* Compact control box for iPhone SE */
+@media (max-width: 375px) {
+  .player {
+    padding: 0.3rem;
+    gap: 6px;
+  }
+
+  .player .cover {
+    width: 50px;
+    height: 50px;
+  }
+
+  .controls-vertical button {
+    font-size: 1rem;
+    padding: 3px;
+  }
+
+  .volume-control {
+    width: 60px;
+    height: 4px;
+  }
+
+  .volume-control::-webkit-slider-thumb {
+    width: 10px;
+    height: 10px;
+  }
+
+  .volume-control::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Compact control box for iPhone XS Max, 12 Pro Max, 14 Pro Max, Samsung Galaxy S8, S9, iPhone 12, iPhone 13 */
+@media (min-width: 376px) and (max-width: 428px) {
+  .player {
+    padding: 0.5rem;
+    gap: 8px;
+  }
+
+  .player .cover {
+    width: 60px;
+    height: 60px;
+  }
+
+  .controls-vertical button {
+    font-size: 1.2rem;
+    padding: 4px;
+  }
+
+  .volume-control {
+    width: 70px;
+    height: 4px;
+  }
+
+  .volume-control::-webkit-slider-thumb {
+    width: 12px;
+    height: 12px;
+  }
+
+  .volume-control::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
   }
 }
